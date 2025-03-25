@@ -1,0 +1,32 @@
+{
+    "name": "manim-dev",
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/ffmpeg-apt-get:1": {}
+    },
+    "build": {
+        "context": "..",
+        "dockerfile": "Dockerfile",  // Refers to .devcontainer/Dockerfile
+        "args": {
+            "devcontainercli": "true"
+        }
+    },
+    "postCreateCommand": "pip install -r docs/requirements.txt && pip install -e .[jupyterlab]",
+    "forwardPorts": [8888],  // Needed for Jupyter Lab  
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "Rickaym.manim-sideview",
+                "ms-python.python",
+                "ms-toolsai.jupyter",
+                "charliermarsh.ruff"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash",
+                "editor.defaultFormatter": "charliermarsh.ruff",
+                "notebook.defaultFormatter": "charliermarsh.ruff",
+                "python.defaultInterpreterPath": "/usr/local/bin/python",
+                "python.selectInterpreter": "/usr/local/bin/python"
+            }
+        }
+    }
+}
